@@ -1,0 +1,87 @@
+{% include "header.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+<!-- Add a style block to remove outlines and borders -->
+<style>
+  .post-body, .post-body * {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove focus outline for all elements inside post-body */
+  .post-body:focus, .post-body *:focus {
+    outline: none !important;
+  }
+</style>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ post.img_url }}');">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="post-heading text-center">
+          <h1>{{ post.title }}</h1>
+          <h2 class="subheading">{{ post.subtitle }}</h2>
+          <span class="meta">
+            Posted by <a href="#">{{ post.author.name }}</a> on {{ post.date }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Post Content -->
+<article>
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="post-body">
+          {{ post.body|safe }}
+        </div>
+
+        <!-- Edit Post Button for Admin Only -->
+        {% if current_user.email == 'admin@gmail.com' %}
+        <div class="d-flex justify-content-end mb-4">
+          <a class="btn btn-primary" href="{{ url_for('edit_post', post_id=post.id) }}">Edit Post</a>
+        </div>
+        {% endif %}
+
+  <!-- Horizontal line divider -->
+        <hr class="divider">
+
+  <!-- Comments Area -->
+        <div class="comments-section mt-5">
+          <!-- Load CKEditor -->
+          {{ ckeditor.load() }}
+          {{ ckeditor.config(name='comment_text') }}
+          <!-- Comment Form -->
+          <div class="mb-4">
+            {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+          </div>
+          <hr class="divider">
+          
+          <!-- Comments List -->
+          <div class="comment-list">
+            <ul class="list-unstyled">
+              {% for comment in post.comments %}
+              <li class="media mb-4">
+                <img class="mr-3 rounded-circle" src="{{ gravatar }}" alt="Gravatar">
+                <span class="h4 sub-text">{{comment.comment_author.name}}</span>
+                <div class="media-body">          
+                  <p>{{ comment.text|safe }}</p>
+                </div>
+              </li>
+              <hr class="divider">
+              
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+{% include "footer.html" %}
