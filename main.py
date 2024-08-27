@@ -78,7 +78,7 @@ class Base(DeclarativeBase):
     pass
 
 # TODO: Configure SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///DAY_69_BlogPosts.db'
+app.config['SQLALCHEMY_DATABASE_URI'] =os.getenv('DB_URL','sqlite:///DAY_69_BlogPosts.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Suppress warning about SQLAlchemy events
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
