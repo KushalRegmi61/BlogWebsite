@@ -8,7 +8,7 @@ This is a blog website created using Python Flask, CKEditor, WTForms, SQLAlchemy
 - **Commenting System:** Logged-in users can comment on blog posts.
 - **Admin Functionality:** A secret admin has the ability to create, edit, and delete blog posts.
 
-You can visit the website at [this link](https://blogwebsite-vqrn.onrender.com/).
+You can visit the website at [Blog_Website](https://blogwebsite-vqrn.onrender.com/).
 
 ## Features
 
