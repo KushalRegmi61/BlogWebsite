@@ -27,5 +27,4 @@ You can visit the website at [Blog_Website](https://blogwebsite-vqrn.onrender.co
 - **JavaScript:** Client-side scripting.
 - **HTML/CSS:** Markup and styling for the website.
 
-  ![Description of the GIF](static/assets/kushal's blog.gif)
-
+![Description of the GIF](static/assets/kushal's%20blog.gif)
